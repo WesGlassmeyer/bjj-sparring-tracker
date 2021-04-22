@@ -5,9 +5,12 @@ import "./LogEntry.css";
 export default function LogEntry(props) {
   return (
     <li className="log-entry">
-      <p> date props April 18, 2021</p>
-      <p> round props Sparring rounds - 4</p>
-      <p> cardio props Cardio: 5</p>
+      <p> {props.entry.date}</p>
+      <p> Sparring rounds - {props.entry.cardio.rounds}</p>
+      <p> Cardio rating: {props.entry.cardio.rating}</p>
+      <p> Submissions executed: {props.entry.submissions.count}</p>
+      <p> Times Tapped: {props.entry.taps.count}</p>
+      <p> Sweeps executed: {props.entry.sweeps.count}</p>
     </li>
   );
 }
