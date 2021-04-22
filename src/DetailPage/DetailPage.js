@@ -39,19 +39,19 @@ export default class DetailPage extends Component {
         <p>
           submissons
           <button type="submit" class="add-subbtn">
-            <Link to="/sparring_details">Add Subs</Link>
+            <Link to="/sparring_specs">Add Subs</Link>
           </button>
         </p>
         <p>
           Taps
           <button type="submit" class="add-tapbtn">
-            <Link to="/sparring_details">Add taps</Link>
+            <Link to="/sparring_specs">Add taps</Link>
           </button>
         </p>
         <p>
           sweeps
           <button type="submit" class="add-sweepbtn">
-            <Link to="/sparring_details">Add sweeps</Link>
+            <Link to="/sparring_specs">Add sweeps</Link>
           </button>
         </p>
         <label for="notes">Notes:</label>
