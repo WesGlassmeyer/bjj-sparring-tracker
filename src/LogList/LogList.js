@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import LogEntry from "../LogEntry/LogEntry";
 import "./LogList.css";
+import dummydata from "../dummydata";
 // import config from "../config";
 
 class LogList extends Component {
-  state = {
-    entries: [],
-    error: null,
-  };
+  // state = {
+  //   entries: [],
+  //   error: null,
+  // };
 
   //   setEntries = (entries) => {
   //     this.setState({
@@ -33,11 +34,11 @@ class LogList extends Component {
   //   }
 
   render() {
-    const logEntries = this.state.entries;
-    if (this.state.entries.length === 0) {
-      return <section className="LogEntryListLoad">Loading...</section>;
-    }
-
+    // const logEntries = this.state.entries;
+    // if (this.state.entries.length === 0) {
+    //   return <section className="LogEntryListLoad">Loading...</section>;
+    // }
+    const logEntries = dummydata.entries;
     return (
       <section className="LogList">
         <ul className="LogList__list" aria-live="polite">
