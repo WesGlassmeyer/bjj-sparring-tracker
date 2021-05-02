@@ -8,17 +8,17 @@ export default class SpecPage extends Component {
     category: "",
     name: "",
     count: 0,
-    clicked: false,
+    addedNames: [],
     filterSelections: [],
   };
 
   setName = (event) => {
     console.log(event.target.value);
-    this.setState({ name: [event.target.value] });
+    this.setState({ name: event.target.value, count: 0 });
   };
 
   setCategory = (event) => {
-    this.setState({ category: event.target.value });
+    this.setState({ category: event.target.value, name: "", count: 0 });
     console.log(this.state.category);
   };
 
@@ -34,7 +34,21 @@ export default class SpecPage extends Component {
   };
 
   addSpecs = () => {
-    this.setState({ clicked: true });
+    console.log(this.state.addedNames, this.state.name);
+    if (
+      this.state.count === 0 ||
+      this.state.name === "" ||
+      this.state.addedNames.includes(this.state.name)
+    ) {
+      return null;
+    } else {
+      this.setState({
+        addedNames: [
+          ...this.state.addedNames,
+          { name: this.state.name, count: this.state.count },
+        ],
+      });
+    }
   };
 
   setFilterSelections = (value, filterType) => {
@@ -42,6 +56,10 @@ export default class SpecPage extends Component {
     this.setState({
       filterSelections: { ...filterSelections, [filterType]: value },
     });
+  };
+
+  deleteTableRow = (index) => {
+    this.setState({ addedNames: [] });
   };
 
   render() {
@@ -83,7 +101,7 @@ export default class SpecPage extends Component {
         id={dropdownValues.category.id}
         label={dropdownValues.category.label}
         value={dropdownValues.category.value}
-        // onChange={this.setCategory}
+        onChange={this.setName}
       />
     );
     if (this.state.category === "Arm Attacks") {
@@ -92,7 +110,7 @@ export default class SpecPage extends Component {
           value={dropdownValues.arm_attacks.value}
           id={dropdownValues.category.id}
           label={dropdownValues.arm_attacks.label}
-          // onChange={this.setCategory}
+          onChange={this.setName}
         />
       );
     } else if (this.state.category === "Chokes") {
@@ -101,6 +119,7 @@ export default class SpecPage extends Component {
           value={dropdownValues.chokes.value}
           id={dropdownValues.chokes.id}
           label={dropdownValues.chokes.label}
+          onChange={this.setName}
         />
       );
     } else if (this.state.category === "Leg Attacks") {
@@ -109,6 +128,7 @@ export default class SpecPage extends Component {
           value={dropdownValues.leg_attacks.value}
           id={dropdownValues.leg_attacks.id}
           label={dropdownValues.leg_attacks.label}
+          onChange={this.setName}
         />
       );
     }
@@ -127,18 +147,6 @@ export default class SpecPage extends Component {
         <br />
         <label htmlFor="Submission">{this.props.title}:</label>
         {nameDropdownFilter}
-        {/* <DropdownFilter
-          id={dropdownValues.category.id}
-          label={dropdownValues.category.label}
-          value={dropdownValues.category.value}
-          onChange={this.setCategory}
-        /> */}
-        {/* <select name="Submission" id="Submission" onChange={this.setName}>
-          <option value="rear naked">rear naked</option>
-          <option value="triangle">triangle</option>
-          <option value="bow and arrow">bow and arrow</option>
-          <option value="arm triangle">arm triangle</option>
-        </select> */}
         <br />
         <p>
           {this.props.title} counter : {this.state.count}
@@ -163,12 +171,32 @@ export default class SpecPage extends Component {
           {" "}
           Add Specifics to list
         </button>
-        <p>Selected {this.props.title} ---------- Count</p>
-        <p>Anaconda Choke ---------------- 1</p>{" "}
+        <table>
+          <thead>
+            <tr>
+              <th>{this.props.title}</th>
+              <th>Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.addedNames.map((names, index) => (
+              <tr key={index}>
+                <td>{names.name}</td>
+                <td>{names.count}</td>
+                <td>
+                  <button type="button" onClick={this.deleteTableRow}>
+                    delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         <p className={this.state.clicked ? "spec-active" : "spec-hidden"}>
           {this.state.name} ---------------{this.state.count}
         </p>
-        <button type="button">delete</button>
+
         <div className="add-specs">
           <button type="submit" className="add-specsbtn">
             <Link to="/sparring_details">Save</Link>
@@ -178,3 +206,6 @@ export default class SpecPage extends Component {
     );
   }
 }
+
+//switch added names to table, add logic for no zero count, delete button removes item from added names,
+//when change category reset name value back to "", add logic so you cant add multiple of the same addedNames to the table
