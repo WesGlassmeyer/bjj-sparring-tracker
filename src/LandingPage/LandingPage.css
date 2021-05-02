@@ -1,0 +1,17 @@
+.landing-page {
+  display: flex;
+  justify-content: center;
+  margin: 10%;
+}
+
+.landing-page-btn {
+  margin: 4% 0% 4% 50%;
+}
+
+.landing-span {
+  margin-left: 25%;
+}
+
+.landing-input {
+  margin-bottom: -5%;
+}

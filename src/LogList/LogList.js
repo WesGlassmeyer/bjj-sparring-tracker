@@ -4,7 +4,7 @@ import "./LogList.css";
 import dummydata from "../dummydata";
 // import config from "../config";
 
-class LogList extends Component {
+export default class LogList extends Component {
   // state = {
   //   entries: [],
   //   error: null,
@@ -40,8 +40,8 @@ class LogList extends Component {
     // }
     const logEntries = dummydata.entries;
     return (
-      <section className="LogList">
-        <ul className="LogList__list" aria-live="polite">
+      <section className="log-list">
+        <ul className="log-list__list" aria-live="polite">
           {logEntries.map((entry) => (
             <LogEntry key={entry.id} entry={entry} />
           ))}
@@ -50,5 +50,3 @@ class LogList extends Component {
     );
   }
 }
-
-export default LogList;

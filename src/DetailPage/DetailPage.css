@@ -1,0 +1,8 @@
+.detail-page-title {
+  text-align: center;
+}
+
+.detail-page-container {
+  display: flex;
+  justify-content: center;
+}

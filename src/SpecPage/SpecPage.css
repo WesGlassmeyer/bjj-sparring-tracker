@@ -1,0 +1,9 @@
+.spec-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spec-hidden {
+  display: none;
+}
