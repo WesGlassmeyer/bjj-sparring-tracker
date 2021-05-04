@@ -2,7 +2,7 @@ import React from "react";
 // import "./DropdownFilter.css";
 
 export default function DropdownFilter(props) {
-  const options = props.value;
+  const options = props.options;
   const optionItems = options.map((data) => (
     <option key={data} value={data}>
       {data}
@@ -12,13 +12,14 @@ export default function DropdownFilter(props) {
   return (
     <div className="custom-select">
       <select
+        disabled={props.disabled}
         aria-label={props.id}
         className="dropdown"
         id={props.id}
         onChange={props.onChange}
-        defaultValue={"DEFAULT"}
+        value={props.value}
       >
-        <option disabled value="DEFAULT">
+        <option disabled value="">
           {" "}
           -- {props.label} --{" "}
         </option>
