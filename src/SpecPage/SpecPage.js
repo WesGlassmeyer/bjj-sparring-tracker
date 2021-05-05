@@ -7,19 +7,16 @@ export default class SpecPage extends Component {
   state = {
     category: "",
     name: "",
-    count: 0,
+    count: 1,
     addedNames: [],
-    filterSelections: [],
   };
 
   setName = (event) => {
-    console.log(event.target.value);
-    this.setState({ name: event.target.value, count: 0 });
+    this.setState({ name: event.target.value, count: 1 });
   };
 
   setCategory = (event) => {
-    this.setState({ category: event.target.value, name: "", count: 0 });
-    console.log(this.state.category);
+    this.setState({ category: event.target.value, name: "", count: 1 });
   };
 
   incrementCount = () => {
@@ -28,17 +25,17 @@ export default class SpecPage extends Component {
 
   decrementCount = () => {
     this.setState({ count: this.state.count - 1 });
-    if (this.state.count <= 0) {
-      this.setState({ count: 0 });
+    if (this.state.count <= 1) {
+      this.setState({ count: 1 });
     }
   };
 
   addSpecs = () => {
-    console.log(this.state.addedNames, this.state.name);
     if (
-      this.state.count === 0 ||
       this.state.name === "" ||
-      this.state.addedNames.includes(this.state.name)
+      this.state.addedNames.some(
+        (entry) => entry.name.toLowerCase() === this.state.name.toLowerCase()
+      )
     ) {
       return null;
     } else {
@@ -51,83 +48,165 @@ export default class SpecPage extends Component {
     }
   };
 
-  setFilterSelections = (value, filterType) => {
-    const { filterSelections } = this.state;
-    this.setState({
-      filterSelections: { ...filterSelections, [filterType]: value },
+  deleteTableRow = (idx) => {
+    const addedNames = this.state.addedNames;
+    const newAddedNames = addedNames.filter((item, index) => {
+      return idx !== index;
     });
-  };
-
-  deleteTableRow = (index) => {
-    this.setState({ addedNames: [] });
+    this.setState({ addedNames: newAddedNames });
   };
 
   render() {
     const dropdownValues = {
       category: {
         id: "category",
-        label: "Choose a Category",
-        value: ["Arm Attacks", "Chokes", "Leg Attacks"],
+        label: "Select a Category",
+        options: ["Arm Attacks", "Chokes", "Leg Attacks"],
+      },
+      sweep_category: {
+        id: "category",
+        label: "Select a Category",
+        options: ["Open Guard", "Closed Guard", "Half Guard"],
       },
       arm_attacks: {
         id: "arm attacks",
-        label: "Choose a Submission",
-        value: ["Americana", "Arm Bar", "Kimura", "Omoplata"],
+        label: "Select Submissions",
+        options: ["Americana", "Arm Bar", "Kimura", "Omoplata"],
       },
       chokes: {
         id: "chokes",
-        label: "Choose a Submission",
-        value: ["Rear Naked", "Triangle", "Arm Triangle", "Bow and Arrow"],
+        label: "Select Submissions",
+        options: ["Rear Naked", "Triangle", "Arm Triangle", "Bow and Arrow"],
       },
       leg_attacks: {
         id: "leg attacks",
-        label: "Choose a Submission",
-        value: ["Heel Hook", "Knee Bar", "Toe Hold", "Straight Ankle"],
+        label: "Select Submissions",
+        options: ["Heel Hook", "Knee Bar", "Toe Hold", "Straight Ankle"],
       },
-      submissions: {
-        id: "submissions",
-        label: "Choose a Submission",
-        value: ["Choke", "Arm Bar", "Kimura", "Triangle", "Leg Locks"],
+      open_guard: {
+        id: "open guard",
+        label: "Select Sweeps",
+        options: [
+          "Elevator Sweep",
+          "Tripod Sweep",
+          "Sickle Sweep",
+          "Overhead Sweep",
+        ],
       },
-      actions: {
-        id: "actions",
-        label: "Choose an Action ",
-        value: ["Escape", "Reversal", "Control", "Attack"],
+      closed_guard: {
+        id: "closed guard",
+        label: "Select Sweeps",
+        options: [
+          "Flower Sweep",
+          "Hip Sweep",
+          "Scissor Sweep",
+          "Pendulum Sweep",
+        ],
+      },
+      half_guard: {
+        id: "half guard",
+        label: "Select Sweeps",
+        options: ["Knee Lever Sweep", "Knee Tap Sweep", "Roll Thru Sweep"],
       },
     };
 
-    let nameDropdownFilter = (
+    let categoryDropdownFilter = (
       <DropdownFilter
         id={dropdownValues.category.id}
         label={dropdownValues.category.label}
-        value={dropdownValues.category.value}
+        options={dropdownValues.category.options}
+        value={this.state.category}
+        onChange={this.setCategory}
+      />
+    );
+    if (this.props.title === "Sweeps") {
+      categoryDropdownFilter = (
+        <DropdownFilter
+          id={dropdownValues.sweep_category.id}
+          label={dropdownValues.sweep_category.label}
+          options={dropdownValues.sweep_category.options}
+          value={this.state.category}
+          onChange={this.setCategory}
+        />
+      );
+    }
+
+    let nameDropdownFilter = (
+      <DropdownFilter
+        disabled={true}
+        id={dropdownValues.category.id}
+        label={`Select ` + this.props.title}
+        options={dropdownValues.category.options}
+        value={this.state.name}
         onChange={this.setName}
       />
     );
     if (this.state.category === "Arm Attacks") {
       nameDropdownFilter = (
         <DropdownFilter
-          value={dropdownValues.arm_attacks.value}
+          options={dropdownValues.arm_attacks.options}
           id={dropdownValues.category.id}
           label={dropdownValues.arm_attacks.label}
+          value={this.state.name}
           onChange={this.setName}
         />
       );
     } else if (this.state.category === "Chokes") {
       nameDropdownFilter = (
         <DropdownFilter
-          value={dropdownValues.chokes.value}
+          options={dropdownValues.chokes.options}
           id={dropdownValues.chokes.id}
           label={dropdownValues.chokes.label}
+          value={this.state.name}
           onChange={this.setName}
         />
       );
     } else if (this.state.category === "Leg Attacks") {
       nameDropdownFilter = (
         <DropdownFilter
-          value={dropdownValues.leg_attacks.value}
+          options={dropdownValues.leg_attacks.options}
           id={dropdownValues.leg_attacks.id}
           label={dropdownValues.leg_attacks.label}
+          value={this.state.name}
+          onChange={this.setName}
+        />
+      );
+    } else if (
+      this.props.title === "Sweeps" &&
+      this.state.category === "Open Guard"
+    ) {
+      nameDropdownFilter = (
+        <DropdownFilter
+          options={dropdownValues.open_guard.options}
+          id={dropdownValues.open_guard.id}
+          label={dropdownValues.open_guard.label}
+          value={this.state.name}
+          onChange={this.setName}
+        />
+      );
+    } else if (
+      this.props.title === "Sweeps" &&
+      this.state.category === "Closed Guard"
+    ) {
+      nameDropdownFilter = (
+        <DropdownFilter
+          options={dropdownValues.closed_guard.options}
+          id={dropdownValues.closed_guard.id}
+          label={dropdownValues.closed_guard.label}
+          value={this.state.name}
+          onChange={this.setName}
+        />
+      );
+    } else if (
+      this.props.title === "Sweeps" &&
+      this.state.category === "Half Guard"
+    ) {
+      nameDropdownFilter = (
+        <DropdownFilter
+          options={dropdownValues.closed_guard.options}
+          id={dropdownValues.closed_guard.id}
+          label={dropdownValues.closed_guard.label}
+          value={this.state.name}
           onChange={this.setName}
         />
       );
@@ -136,23 +215,19 @@ export default class SpecPage extends Component {
     return (
       <div className="spec-page-container">
         <h2 className="detail-page-title">Add {this.props.title}</h2>
-        <button onClick={this.props.changeForms}> Go Back</button>
+        <button onClick={this.props.changeForms}>Back</button>
         <label htmlFor="category">{this.props.title} Category:</label>
-        <DropdownFilter
-          id={dropdownValues.category.id}
-          label={dropdownValues.category.label}
-          value={dropdownValues.category.value}
-          onChange={this.setCategory}
-        />
+        {categoryDropdownFilter}
+
         <br />
-        <label htmlFor="Submission">{this.props.title}:</label>
+        <label htmlFor="action_name">{this.props.title}:</label>
         {nameDropdownFilter}
         <br />
-        <p>
-          {this.props.title} counter : {this.state.count}
+        <span className="counter-container">
+          {this.props.title} Counter : {this.state.count}
           <button
             type="button"
-            className="add-specsbtn"
+            className="add-counter-btn"
             onClick={this.incrementCount}
           >
             {" "}
@@ -160,16 +235,20 @@ export default class SpecPage extends Component {
           </button>
           <button
             type="button"
-            className="minus-specsbtn"
+            className="minus-counter-btn"
             onClick={this.decrementCount}
           >
             {" "}
             -
           </button>
-        </p>
-        <button type="button" className="add-specslist" onClick={this.addSpecs}>
+        </span>
+        <button
+          type="button"
+          className="add-specs-list"
+          onClick={this.addSpecs}
+        >
           {" "}
-          Add Specifics to list
+          Add {this.props.title}
         </button>
         <table>
           <thead>
@@ -180,12 +259,18 @@ export default class SpecPage extends Component {
           </thead>
           <tbody>
             {this.state.addedNames.map((names, index) => (
-              <tr key={index}>
+              <tr key={index} id={index}>
                 <td>{names.name}</td>
                 <td>{names.count}</td>
                 <td>
-                  <button type="button" onClick={this.deleteTableRow}>
-                    delete
+                  <button
+                    type="button"
+                    className="delete-table-row-btn"
+                    onClick={() => {
+                      this.deleteTableRow(index);
+                    }}
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>
@@ -193,12 +278,14 @@ export default class SpecPage extends Component {
           </tbody>
         </table>
 
-        <p className={this.state.clicked ? "spec-active" : "spec-hidden"}>
-          {this.state.name} ---------------{this.state.count}
-        </p>
-
         <div className="add-specs">
-          <button type="submit" className="add-specsbtn">
+          <button
+            type="submit"
+            className="save-list-btn"
+            onClick={() => {
+              this.props.setSpecPageState(this.state.addedNames);
+            }}
+          >
             <Link to="/sparring_details">Save</Link>
           </button>
         </div>
@@ -207,5 +294,4 @@ export default class SpecPage extends Component {
   }
 }
 
-//switch added names to table, add logic for no zero count, delete button removes item from added names,
-//when change category reset name value back to "", add logic so you cant add multiple of the same addedNames to the table
+//!name drop doesn't have category as default(send empty array of category or disabled attribute), add addedNames from specs state to details state, detail page with onchange to update state

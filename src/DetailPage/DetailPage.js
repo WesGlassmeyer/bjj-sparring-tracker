@@ -5,8 +5,36 @@ import "./DetailPage.css";
 
 export default class DetailPage extends Component {
   state = {
-    valueSelections: {},
+    // valueSelections: {},
     currentForm: "main",
+    date: "",
+    cardio: {
+      rounds: 0,
+      round_length: 0,
+      rating: 0,
+    },
+    submissions: [
+      {
+        count: 0,
+        category: "",
+        name: "",
+      },
+    ],
+    sweeps: [
+      {
+        count: 0,
+        category: "",
+        name: "",
+      },
+    ],
+    taps: [
+      {
+        count: 0,
+        category: "",
+        name: "",
+      },
+    ],
+    notes: "",
   };
 
   changeForms = (formName) => {
@@ -14,11 +42,18 @@ export default class DetailPage extends Component {
     console.log("form name", formName);
   };
 
-  setFilterSelections = (value, valueType) => {
-    const { valueSelections } = this.state;
+  // setFilterSelections = (value, valueType) => {
+  //   const { valueSelections } = this.state;
+  //   this.setState({
+  //     valueSelections: { ...valueSelections, [valueType]: value },
+  //   });
+  // };
+
+  setSpecPageState = (addedNames) => {
     this.setState({
-      valueSelections: { ...valueSelections, [valueType]: value },
+      submissions: [{ count: addedNames.count, name: addedNames.name }],
     });
+    console.log(addedNames, addedNames.count, addedNames.name);
   };
 
   handleSubmit = (event) => {
@@ -27,11 +62,16 @@ export default class DetailPage extends Component {
   };
   render() {
     if (this.state.currentForm === "subs") {
-      return <SpecPage title={"Submissons"} changeForms={this.changeForms} />;
+      return (
+        <SpecPage
+          title={"Submissons"}
+          setSpecPageState={this.setSpecPageState}
+        />
+      );
     } else if (this.state.currentForm === "taps") {
-      return <SpecPage title={"Taps"} changeForms={this.changeForms} />;
+      return <SpecPage title={"Taps"} />;
     } else if (this.state.currentForm === "sweeps") {
-      return <SpecPage title={"Sweeps"} changeForms={this.changeForms} />;
+      return <SpecPage title={"Sweeps"} />;
     }
     return (
       <div className="detail-page-container">
