@@ -50,10 +50,20 @@ export default class DetailPage extends Component {
   // };
 
   setSpecPageState = (addedNames) => {
-    this.setState({
-      submissions: [{ count: addedNames.count, name: addedNames.name }],
-    });
-    console.log(addedNames, addedNames.count, addedNames.name);
+    if (this.state.currentForm === "subs") {
+      this.setState({
+        submissions: [addedNames],
+      });
+    } else if (this.state.currentForm === "taps") {
+      this.setState({
+        taps: [addedNames],
+      });
+    } else if (this.state.currentForm === "sweeps") {
+      this.setState({
+        sweeps: [addedNames],
+      });
+    }
+    console.log(this.state.currentForm);
   };
 
   handleSubmit = (event) => {
@@ -66,6 +76,7 @@ export default class DetailPage extends Component {
         <SpecPage
           title={"Submissons"}
           setSpecPageState={this.setSpecPageState}
+          changeForms={this.changeForms}
         />
       );
     } else if (this.state.currentForm === "taps") {
