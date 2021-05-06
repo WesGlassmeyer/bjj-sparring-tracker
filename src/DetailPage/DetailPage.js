@@ -38,8 +38,12 @@ export default class DetailPage extends Component {
   };
 
   changeForms = (formName) => {
-    this.setState({ currentForm: formName });
-    console.log("form name", formName);
+    if (this.state.currentForm !== "main") {
+      this.setState({ currentForm: "main" });
+    } else {
+      this.setState({ currentForm: formName });
+      console.log("form name", formName);
+    }
   };
 
   // setFilterSelections = (value, valueType) => {
@@ -80,9 +84,21 @@ export default class DetailPage extends Component {
         />
       );
     } else if (this.state.currentForm === "taps") {
-      return <SpecPage title={"Taps"} />;
+      return (
+        <SpecPage
+          title={"Taps"}
+          setSpecPageState={this.setSpecPageState}
+          changeForms={this.changeForms}
+        />
+      );
     } else if (this.state.currentForm === "sweeps") {
-      return <SpecPage title={"Sweeps"} />;
+      return (
+        <SpecPage
+          title={"Sweeps"}
+          setSpecPageState={this.setSpecPageState}
+          changeForms={this.changeForms}
+        />
+      );
     }
     return (
       <div className="detail-page-container">
