@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import SpecPage from "../SpecPage/SpecPage";
 import "./DetailPage.css";
 
 export default class DetailPage extends Component {
   state = {
-    // valueSelections: {},
     currentForm: "main",
     date: "",
-    round_length: 0,
-    cardio: 0,
+    rounds: null,
+    round_length: null,
+    cardio: null,
     submissions: [],
     sweeps: [],
     taps: [],
@@ -49,16 +48,8 @@ export default class DetailPage extends Component {
       this.setState({ currentForm: "main" });
     } else {
       this.setState({ currentForm: formName });
-      console.log("form name", formName);
     }
   };
-
-  // setFilterSelections = (value, valueType) => {
-  //   const { valueSelections } = this.state;
-  //   this.setState({
-  //     valueSelections: { ...valueSelections, [valueType]: value },
-  //   });
-  // };
 
   setSpecPageState = (addedNames) => {
     if (this.state.currentForm === "subs") {
@@ -74,12 +65,12 @@ export default class DetailPage extends Component {
         sweeps: addedNames,
       });
     }
-    console.log(this.state.currentForm);
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state);
+    this.props.handleEdit();
   };
 
   detailPageState = () => {
@@ -126,11 +117,17 @@ export default class DetailPage extends Component {
         <form onSubmit={this.handleSubmit}>
           <h2 className="detail-page-title">Add Sparring Details</h2>
           <label htmlFor="date">Select date:</label>
-          <input type="date" id="date" name="date" onChange={this.setDate} />
+          <input
+            type="date"
+            id="date"
+            name="date"
+            value={this.state.date}
+            onChange={this.setDate}
+          />
           <br />
           <label htmlFor="rounds">Total Training Rounds:</label>
           <input
-            value={this.state.cardio.rounds}
+            value={this.state.rounds}
             type="number"
             min="1"
             max="100"
@@ -140,7 +137,7 @@ export default class DetailPage extends Component {
           <br />
           <label htmlFor="length">Round Length:</label>
           <input
-            value={this.state.cardio.round_length}
+            value={this.state.round_length}
             type="number"
             min="1"
             max="60"
@@ -149,7 +146,12 @@ export default class DetailPage extends Component {
           />
           <br />
           <label htmlFor="length">Rate Cardio:</label>
-          <select name="length" id="length" onChange={this.setCardio}>
+          <select
+            name="length"
+            id="length"
+            onChange={this.setCardio}
+            value={this.state.cardio}
+          >
             <option selected disabled value="">
               -- Select --
             </option>
@@ -160,10 +162,10 @@ export default class DetailPage extends Component {
             <option value="5">5 - Excellent</option>
           </select>
           <p>
-            Submissons
+            Submission
             <button
               type="button"
-              className="add-subbtn"
+              className="add-sub-btn"
               onClick={() => {
                 this.changeForms("subs");
               }}
@@ -175,7 +177,7 @@ export default class DetailPage extends Component {
             Taps
             <button
               type="button"
-              className="add-tapbtn"
+              className="add-tap-btn"
               onClick={() => {
                 this.changeForms("taps");
               }}
@@ -208,10 +210,10 @@ export default class DetailPage extends Component {
           <div className="add-details">
             <button
               type="submit"
-              className="add-detailsbtn"
+              className="add-details-btn"
               onClick={this.handleSubmit}
             >
-              <Link to="/sparring_log">Save</Link>
+              Save
             </button>
           </div>
         </form>

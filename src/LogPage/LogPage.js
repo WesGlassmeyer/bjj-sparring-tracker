@@ -12,11 +12,14 @@ export default class LogPage extends Component {
   handleEdit = () => {
     console.log("clicked add", this.state.edit);
     this.setState({ edit: true });
+    if (this.state.edit === true) {
+      this.setState({ edit: false });
+    }
   };
   render() {
     const edit = this.state.edit;
     if (edit === true) {
-      return <DetailPage />;
+      return <DetailPage handleEdit={this.handleEdit} />;
     }
     return (
       <div className="log-page">
