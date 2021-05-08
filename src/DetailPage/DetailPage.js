@@ -8,33 +8,40 @@ export default class DetailPage extends Component {
     // valueSelections: {},
     currentForm: "main",
     date: "",
-    cardio: {
-      rounds: 0,
-      round_length: 0,
-      rating: 0,
-    },
-    submissions: [
-      {
-        count: 0,
-        category: "",
-        name: "",
-      },
-    ],
-    sweeps: [
-      {
-        count: 0,
-        category: "",
-        name: "",
-      },
-    ],
-    taps: [
-      {
-        count: 0,
-        category: "",
-        name: "",
-      },
-    ],
+    round_length: 0,
+    cardio: 0,
+    submissions: [],
+    sweeps: [],
+    taps: [],
     notes: "",
+  };
+
+  setDate = (event) => {
+    this.setState({ date: event.target.value });
+  };
+
+  setRounds = (event) => {
+    this.setState({
+      rounds: parseInt(event.target.value),
+    });
+  };
+
+  setLength = (event) => {
+    this.setState({
+      round_length: parseInt(event.target.value),
+    });
+  };
+
+  setCardio = (event) => {
+    this.setState({
+      cardio: parseInt(event.target.value),
+    });
+  };
+
+  setNotes = (event) => {
+    this.setState({
+      notes: event.target.value,
+    });
   };
 
   changeForms = (formName) => {
@@ -56,15 +63,15 @@ export default class DetailPage extends Component {
   setSpecPageState = (addedNames) => {
     if (this.state.currentForm === "subs") {
       this.setState({
-        submissions: [addedNames],
+        submissions: addedNames,
       });
     } else if (this.state.currentForm === "taps") {
       this.setState({
-        taps: [addedNames],
+        taps: addedNames,
       });
     } else if (this.state.currentForm === "sweeps") {
       this.setState({
-        sweeps: [addedNames],
+        sweeps: addedNames,
       });
     }
     console.log(this.state.currentForm);
@@ -74,6 +81,17 @@ export default class DetailPage extends Component {
     event.preventDefault();
     console.log(this.state);
   };
+
+  detailPageState = () => {
+    if (this.state.currentForm === "subs") {
+      return this.state.submissions;
+    } else if (this.state.currentForm === "taps") {
+      return this.state.taps;
+    } else if (this.state.currentForm === "sweeps") {
+      return this.state.sweeps;
+    }
+  };
+
   render() {
     if (this.state.currentForm === "subs") {
       return (
@@ -81,6 +99,7 @@ export default class DetailPage extends Component {
           title={"Submissons"}
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
+          detailPageState={this.detailPageState}
         />
       );
     } else if (this.state.currentForm === "taps") {
@@ -89,6 +108,7 @@ export default class DetailPage extends Component {
           title={"Taps"}
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
+          detailPageState={this.detailPageState}
         />
       );
     } else if (this.state.currentForm === "sweeps") {
@@ -97,6 +117,7 @@ export default class DetailPage extends Component {
           title={"Sweeps"}
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
+          detailPageState={this.detailPageState}
         />
       );
     }
@@ -105,36 +126,41 @@ export default class DetailPage extends Component {
         <form onSubmit={this.handleSubmit}>
           <h2 className="detail-page-title">Add Sparring Details</h2>
           <label htmlFor="date">Select date:</label>
-          <input type="date" id="date" name="date" />
+          <input type="date" id="date" name="date" onChange={this.setDate} />
           <br />
           <label htmlFor="rounds">Total Training Rounds:</label>
-          <select name="rounds" id="rounds" onChange={this.setFilterSelections}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
+          <input
+            value={this.state.cardio.rounds}
+            type="number"
+            min="1"
+            max="100"
+            step="1"
+            onChange={this.setRounds}
+          />
           <br />
           <label htmlFor="length">Round Length:</label>
-          <select name="length" id="length" onChange={this.setFilterSelections}>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
+          <input
+            value={this.state.cardio.round_length}
+            type="number"
+            min="1"
+            max="60"
+            step="1"
+            onChange={this.setLength}
+          />
           <br />
           <label htmlFor="length">Rate Cardio:</label>
-          <select name="length" id="length" onChange={this.setFilterSelections}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
+          <select name="length" id="length" onChange={this.setCardio}>
+            <option selected disabled value="">
+              -- Select --
+            </option>
+            <option value="1">1 - Poor</option>
+            <option value="2">2 - Fair</option>
+            <option value="3">3 - Average</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
           </select>
           <p>
-            submissons
+            Submissons
             <button
               type="button"
               className="add-subbtn"
@@ -154,11 +180,11 @@ export default class DetailPage extends Component {
                 this.changeForms("taps");
               }}
             >
-              Add taps
+              Add Taps
             </button>
           </p>
           <p>
-            sweeps
+            Sweeps
             <button
               type="button"
               className="add-sweepbtn"
@@ -166,19 +192,25 @@ export default class DetailPage extends Component {
                 this.changeForms("sweeps");
               }}
             >
-              Add sweeps
+              Add Sweeps
             </button>
           </p>
           <label htmlFor="notes">Notes:</label>
           <textarea
+            value={this.state.notes}
             id="notes"
             name="notes"
             rows="4"
             cols="50"
             placeholder="add notes"
+            onChange={this.setNotes}
           ></textarea>
           <div className="add-details">
-            <button type="submit" className="add-detailsbtn">
+            <button
+              type="submit"
+              className="add-detailsbtn"
+              onClick={this.handleSubmit}
+            >
               <Link to="/sparring_log">Save</Link>
             </button>
           </div>

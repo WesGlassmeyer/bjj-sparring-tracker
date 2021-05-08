@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import DropdownFilter from "../DropdownFilter/DropdownFilter";
 import "./SpecPage.css";
 
@@ -8,7 +8,7 @@ export default class SpecPage extends Component {
     category: "",
     name: "",
     count: 1,
-    addedNames: [],
+    addedNames: this.props.detailPageState(),
   };
 
   setName = (event) => {
@@ -203,9 +203,9 @@ export default class SpecPage extends Component {
     ) {
       nameDropdownFilter = (
         <DropdownFilter
-          options={dropdownValues.closed_guard.options}
-          id={dropdownValues.closed_guard.id}
-          label={dropdownValues.closed_guard.label}
+          options={dropdownValues.half_guard.options}
+          id={dropdownValues.half_guard.id}
+          label={dropdownValues.half_guard.label}
           value={this.state.name}
           onChange={this.setName}
         />
@@ -284,9 +284,10 @@ export default class SpecPage extends Component {
             className="save-list-btn"
             onClick={() => {
               this.props.setSpecPageState(this.state.addedNames);
+              this.props.changeForms();
             }}
           >
-            <Link to="/sparring_details">Save</Link>
+            Save
           </button>
         </div>
       </div>
@@ -294,4 +295,6 @@ export default class SpecPage extends Component {
   }
 }
 
-//!name drop doesn't have category as default(send empty array of category or disabled attribute), add addedNames from specs state to details state, detail page with onchange to update state
+// detail page with onchange to update state
+
+// !default state of detail page for specs should be empty array not object, !same idea for cardio on detail page,  !pass props to spec page state(initialize as not empty array) so if you save and want to go back saved items are on list.
