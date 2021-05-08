@@ -43,7 +43,11 @@ export default class LogList extends Component {
       <section className="log-list">
         <ul className="log-list__list" aria-live="polite">
           {logEntries.map((entry) => (
-            <LogEntry key={entry.id} entry={entry} />
+            <LogEntry
+              key={entry.id}
+              entry={entry}
+              handleEdit={this.props.handleEdit}
+            />
           ))}
         </ul>
       </section>
