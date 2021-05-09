@@ -295,6 +295,4 @@ export default class SpecPage extends Component {
   }
 }
 
-// detail page with onchange to update state
-
-// !default state of detail page for specs should be empty array not object, !same idea for cardio on detail page,  !pass props to spec page state(initialize as not empty array) so if you save and want to go back saved items are on list.
+// check current form name for add subs button hiccup, change landing page so all buttons take you in, detail page add alert that you are gonna post, stat page pie graphs for subs taps sweeps from nivo to entries, entries page use reduce to get total number of subs taps sweeps

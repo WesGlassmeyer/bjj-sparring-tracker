@@ -3,18 +3,25 @@ import SpecPage from "../SpecPage/SpecPage";
 import "./DetailPage.css";
 
 export default class DetailPage extends Component {
-  state = {
-    edit: false,
-    currentForm: "main",
-    date: "",
-    rounds: "",
-    round_length: "",
-    cardio: "",
-    submissions: [],
-    sweeps: [],
-    taps: [],
-    notes: "",
-  };
+  constructor(props) {
+    super(props);
+    if (props.initialData) {
+      this.state = props.initialData + props.currentForm;
+    } else {
+      this.state = {
+        // edit: false,
+        currentForm: "main",
+        date: "",
+        rounds: "",
+        round_length: "",
+        cardio: "",
+        submissions: [],
+        sweeps: [],
+        taps: [],
+        notes: "",
+      };
+    }
+  }
 
   setDate = (event) => {
     this.setState({ date: event.target.value });
@@ -124,12 +131,7 @@ export default class DetailPage extends Component {
             type="date"
             id="date"
             name="date"
-            value={
-              this.state.currentForm === "main"
-                ? this.state.date
-                : this.props.data.date
-            }
-            // value={this.state.date}
+            value={this.state.date}
             onChange={this.setDate}
           />
           <br />

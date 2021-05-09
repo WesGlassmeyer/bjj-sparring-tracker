@@ -7,33 +7,39 @@ import dummydata from "../dummydata";
 export default class LogPage extends Component {
   state = {
     edit: false,
+    initialData: null,
   };
 
-  handleEdit = () => {
-    this.setState({ edit: true });
+  handleEdit = (id) => {
+    this.setState({
+      edit: true,
+      initialData: dummydata.entries.find((entry) => {
+        return id === entry.id;
+      }),
+    });
     if (this.state.edit === true) {
       this.setState({ edit: false });
     }
-    this.editEntry();
+    // this.editEntry();
   };
 
-  editEntry = (idx) => {
-    const entries = dummydata.entries;
-    const selectedEntry = entries.filter((item, index) => {
-      return idx === index;
-    });
-    console.log(selectedEntry);
-    return selectedEntry;
-  };
+  // editEntry = (idx) => {
+  //   const entries = dummydata.entries;
+  //   const selectedEntry = entries.filter((item, index) => {
+  //     return idx === index;
+  //   });
+  //   console.log(selectedEntry);
+  //   return selectedEntry;
+  // };
 
   render() {
     const edit = this.state.edit;
     if (edit === true) {
       return (
         <DetailPage
-          data={dummydata.entries}
+          initialData={this.state.initialData}
           handleEdit={this.handleEdit}
-          edit={true}
+          // edit={true}
         />
       );
     }

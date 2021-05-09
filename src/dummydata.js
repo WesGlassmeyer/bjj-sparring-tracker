@@ -3,77 +3,77 @@ const dummydata = {
     {
       id: 1,
       date: "2021-04-18",
-      cardio: {
-        rounds: 1,
-        roundLength: 15,
-        rating: 5,
-        totalLength: 15,
-      },
-      submissions: {
-        count: 1,
-        category: "chokes",
-        subName: "Rear Naked Choke",
-      },
-      taps: {
-        count: 2,
-        category: "arm attacks",
-        subName: "Arm Bar",
-      },
-      sweeps: {
-        count: 3,
-        category: "open guard",
-        sweepName: "Sumi Gaeshi",
-      },
+      rounds: 1,
+      round_length: 15,
+      cardio: 5,
+      submissions: [
+        {
+          count: 1,
+          name: "Rear Naked Choke",
+        },
+      ],
+      taps: [
+        {
+          count: 2,
+          name: "Arm Bar",
+        },
+      ],
+      sweeps: [
+        {
+          count: 3,
+          name: "Hip Sweep",
+        },
+      ],
     },
     {
       id: 2,
-      date: "April 19, 2021",
-      cardio: {
-        rounds: 2,
-        roundLength: 10,
-        rating: 4,
-        totalLength: 20,
-      },
-      submissions: {
-        count: 2,
-        category: "leg attacks",
-        subName: "Ankle Lock",
-      },
-      taps: {
-        count: 1,
-        category: "chokes",
-        subName: "Arm Triangle",
-      },
-      sweeps: {
-        count: 3,
-        category: "closed guard",
-        sweepName: "Pendulum Sweep",
-      },
+      date: "2021-04-19",
+      rounds: 2,
+      round_length: 10,
+      cardio: 3,
+      submissions: [
+        {
+          count: 10,
+          name: "Rear Naked Choke",
+        },
+      ],
+      taps: [
+        {
+          count: 1,
+          name: "Arm Bar",
+        },
+      ],
+      sweeps: [
+        {
+          count: 7,
+          name: "Hip Sweep",
+        },
+      ],
     },
     {
       id: 3,
-      date: "April 20, 2021",
-      cardio: {
-        rounds: 3,
-        roundLength: 5,
-        rating: 3,
-        totalLength: 15,
-      },
-      submissions: {
-        count: 4,
-        category: "arm attacks",
-        subName: "kimura",
-      },
-      taps: {
-        count: 2,
-        category: "leg attacks",
-        subName: "Heel Hook",
-      },
-      sweeps: {
-        count: 2,
-        category: "closed guard",
-        sweepName: "Hip Bump",
-      },
+      date: "2021-04-20",
+      rounds: 5,
+      round_length: 5,
+      cardio: 1,
+      submissions: [
+        {
+          count: 2,
+          name: "Triangle",
+        },
+      ],
+      taps: [
+        {
+          count: 7,
+          name: "Kimura",
+        },
+      ],
+      sweeps: [
+        {
+          count: 6,
+          name: "Flower Sweep",
+        },
+      ],
     },
   ],
   nivo: [
