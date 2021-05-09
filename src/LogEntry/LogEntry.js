@@ -26,7 +26,7 @@ export default function LogEntry(props) {
         {" "}
         Sweeps executed: {props.entry.sweeps.count}
       </span>
-      <button type="button" onClick={this.props.handleEdit()}>
+      <button type="button" onClick={props.handleEdit}>
         Edit
       </button>
     </li>

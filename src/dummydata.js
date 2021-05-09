@@ -2,7 +2,7 @@ const dummydata = {
   entries: [
     {
       id: 1,
-      date: "April 18, 2021",
+      date: "2021-04-18",
       cardio: {
         rounds: 1,
         roundLength: 15,

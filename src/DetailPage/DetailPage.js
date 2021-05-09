@@ -4,11 +4,12 @@ import "./DetailPage.css";
 
 export default class DetailPage extends Component {
   state = {
+    edit: false,
     currentForm: "main",
     date: "",
-    rounds: null,
-    round_length: null,
-    cardio: null,
+    rounds: "",
+    round_length: "",
+    cardio: "",
     submissions: [],
     sweeps: [],
     taps: [],
@@ -116,12 +117,19 @@ export default class DetailPage extends Component {
       <div className="detail-page-container">
         <form onSubmit={this.handleSubmit}>
           <h2 className="detail-page-title">Add Sparring Details</h2>
+          <button onClick={this.props.changeForms}>Back</button>
+          <br />
           <label htmlFor="date">Select date:</label>
           <input
             type="date"
             id="date"
             name="date"
-            value={this.state.date}
+            value={
+              this.state.currentForm === "main"
+                ? this.state.date
+                : this.props.data.date
+            }
+            // value={this.state.date}
             onChange={this.setDate}
           />
           <br />

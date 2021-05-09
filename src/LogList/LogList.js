@@ -38,6 +38,7 @@ export default class LogList extends Component {
     // if (this.state.entries.length === 0) {
     //   return <section className="LogEntryListLoad">Loading...</section>;
     // }
+
     const logEntries = dummydata.entries;
     return (
       <section className="log-list">
