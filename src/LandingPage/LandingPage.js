@@ -73,13 +73,13 @@ export default class LandingPage extends Component {
           </div>
           <br />
           <button type="submit" className="landing-page-btn">
-            Login
+            <Link to="/sparring_log">Log In</Link>
           </button>
           <br />
           <span className="landing-span">
             Don't have an account? <br />
             <button type="submit" className="landing-page-btn">
-              Sign Up
+              <Link to="/sparring_log">Sign Up</Link>
             </button>
             <br />
           </span>

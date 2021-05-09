@@ -13,7 +13,11 @@ export default function LogEntry(props) {
       <span className="entry-span"> Cardio rating: {props.entry.cardio}</span>
       <span className="entry-span">
         {" "}
-        Submissions executed: {props.entry.submissions.length}
+        Submissions executed:{" "}
+        {props.entry.submissions.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.count;
+        })}
+        {/* {props.entry.submissions.count} */}
       </span>
       <span className="entry-span">
         {" "}

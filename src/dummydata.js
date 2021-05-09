@@ -6,6 +6,7 @@ const dummydata = {
       rounds: 1,
       round_length: 15,
       cardio: 5,
+      notes: "Today was a good day!",
       submissions: [
         {
           count: 1,
@@ -31,6 +32,7 @@ const dummydata = {
       rounds: 2,
       round_length: 10,
       cardio: 3,
+      notes: "Need to work on my arm bar defense",
       submissions: [
         {
           count: 10,
@@ -56,6 +58,7 @@ const dummydata = {
       rounds: 5,
       round_length: 5,
       cardio: 1,
+      notes: "",
       submissions: [
         {
           count: 2,

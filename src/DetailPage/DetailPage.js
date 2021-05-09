@@ -6,7 +6,9 @@ export default class DetailPage extends Component {
   constructor(props) {
     super(props);
     if (props.initialData) {
-      this.state = props.initialData + props.currentForm;
+      let currentForm = { currentForm: "main" };
+      let initialData = props.initialData;
+      this.state = { ...initialData, ...currentForm };
     } else {
       this.state = {
         // edit: false,
@@ -78,6 +80,7 @@ export default class DetailPage extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     console.log(this.state);
+    alert("Your log entry will be added via a POST request");
     this.props.handleEdit();
   };
 
