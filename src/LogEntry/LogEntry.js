@@ -16,16 +16,21 @@ export default function LogEntry(props) {
         Submissions executed:{" "}
         {props.entry.submissions.reduce((accumulator, currentValue) => {
           return accumulator + currentValue.count;
-        })}
-        {/* {props.entry.submissions.count} */}
+        }, 0)}
       </span>
       <span className="entry-span">
         {" "}
-        Times Tapped: {props.entry.taps.length}
+        Times Tapped:{" "}
+        {props.entry.taps.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.count;
+        }, 0)}
       </span>
       <span className="entry-span">
         {" "}
-        Sweeps executed: {props.entry.sweeps.length}
+        Sweeps executed:{" "}
+        {props.entry.sweeps.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.count;
+        }, 0)}
       </span>
       <button
         type="button"

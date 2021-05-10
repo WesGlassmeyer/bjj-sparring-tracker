@@ -12,11 +12,19 @@ const dummydata = {
           count: 1,
           name: "Rear Naked Choke",
         },
+        {
+          count: 5,
+          name: "Arm Bar",
+        },
       ],
       taps: [
         {
           count: 2,
           name: "Arm Bar",
+        },
+        {
+          count: 20,
+          name: "Heel Hook",
         },
       ],
       sweeps: [
@@ -75,6 +83,10 @@ const dummydata = {
         {
           count: 6,
           name: "Flower Sweep",
+        },
+        {
+          count: 30,
+          name: "Knee Lever",
         },
       ],
     },
