@@ -11,7 +11,7 @@ export default class DetailPage extends Component {
       this.state = { ...initialData, ...currentForm };
     } else {
       this.state = {
-        // edit: false,
+        // edit: false, or use id from initial data to check whether to post or put
         currentForm: "main",
         date: "",
         rounds: "",

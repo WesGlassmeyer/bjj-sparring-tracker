@@ -137,7 +137,7 @@ const dummydata = {
       id: "armbar",
       label: "armbar",
       value: 232,
-      color: "hsl(218, 70%, 50%)",
+      color: "hsl(118, 70%, 50%)",
     },
     {
       id: "triangle",
