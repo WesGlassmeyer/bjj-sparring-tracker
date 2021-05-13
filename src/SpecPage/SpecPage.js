@@ -294,5 +294,3 @@ export default class SpecPage extends Component {
     );
   }
 }
-
-// !check current form name for add subs button hiccup, !change landing page so all buttons take you in, !detail page add alert that you are gonna post, stat page pie graphs for subs taps sweeps from nivo to entries, !log page use reduce to get total number of subs taps sweeps

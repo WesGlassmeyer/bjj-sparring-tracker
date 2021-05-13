@@ -125,7 +125,7 @@ export default class DetailPage extends Component {
     }
     return (
       <div className="detail-page-container">
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <h2 className="detail-page-title">Add Sparring Details</h2>
           <button onClick={this.props.changeForms}>Back</button>
           <br />
