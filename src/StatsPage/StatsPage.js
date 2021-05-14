@@ -12,11 +12,11 @@ export default class StatsPage extends Component {
     enableSlices: "x",
   };
 
-  submissionsData = () => {
+  categoryData = (category) => {
     let moveCounter = {};
     dummydata.entries.forEach((entry) => {
-      if (entry.submissions.length > 0) {
-        entry.submissions.forEach((move) => {
+      if (entry[category].length > 0) {
+        entry[category].forEach((move) => {
           if (moveCounter[move.name]) {
             moveCounter[move.name] += move.count;
           } else {
@@ -25,19 +25,16 @@ export default class StatsPage extends Component {
         });
       }
     });
-    console.log(moveCounter);
+
     const convertedData = [];
     Object.keys(moveCounter).forEach((item) => {
-      console.log(item, moveCounter[item]);
       const newFormat = {
         id: item,
         value: moveCounter[item],
       };
-      console.log(newFormat);
       convertedData.push(newFormat);
     });
-
-    console.log(convertedData);
+    return convertedData;
   };
 
   render() {
@@ -46,18 +43,11 @@ export default class StatsPage extends Component {
         {/* <div classname="line-chart" style={{ height: "75vh", width: "75vw" }}>
           <ResponsiveLine data={dummydata.nivo} {...this.commonProperties} />
         </div> */}
-        {/* <button
-          type="button"
-          className="data-btn"
-          onClick={this.submissionsData}
-        >
-          data
-        </button> */}
+
         <h2>Submissons</h2>
         <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
           <ResponsivePie
-            // data={this.submissionsData}
-            data={dummydata.pie}
+            data={this.categoryData("submissions")}
             {...this.commonProperties}
             legends={[]}
           />
@@ -65,7 +55,7 @@ export default class StatsPage extends Component {
         <h2>Taps</h2>
         <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
           <ResponsivePie
-            data={dummydata.pie}
+            data={this.categoryData("taps")}
             {...this.commonProperties}
             legends={[]}
           />
@@ -73,17 +63,13 @@ export default class StatsPage extends Component {
         <h2>Sweeps</h2>
         <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
           <ResponsivePie
-            data={dummydata.pie}
+            data={this.categoryData("sweeps")}
             {...this.commonProperties}
             legends={[]}
           />
         </div>
         <div className="back-btn">
-          <button
-            type="button"
-            className="back-btn"
-            onClick={this.submissionsData}
-          >
+          <button type="button" className="back-btn">
             <Link to="/sparring_log">Back</Link>
           </button>
         </div>
