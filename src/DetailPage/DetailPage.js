@@ -165,7 +165,7 @@ export default class DetailPage extends Component {
             onChange={this.setCardio}
             value={this.state.cardio}
           >
-            <option selected disabled value="">
+            <option disabled value="">
               -- Select --
             </option>
             <option value="1">1 - Poor</option>

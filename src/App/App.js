@@ -3,8 +3,6 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import LandingPage from "../LandingPage/LandingPage";
 import LogPage from "../LogPage/LogPage";
-// import DetailPage from "../DetailPage/DetailPage";
-// import SpecPage from "../SpecPage/SpecPage";
 import StatsPage from "../StatsPage/StatsPage";
 import NavBar from "../NavBar/NavBar";
 

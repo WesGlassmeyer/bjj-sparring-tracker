@@ -20,17 +20,7 @@ export default class LogPage extends Component {
     if (this.state.edit === true) {
       this.setState({ edit: false });
     }
-    // this.editEntry();
   };
-
-  // editEntry = (idx) => {
-  //   const entries = dummydata.entries;
-  //   const selectedEntry = entries.filter((item, index) => {
-  //     return idx === index;
-  //   });
-  //   console.log(selectedEntry);
-  //   return selectedEntry;
-  // };
 
   render() {
     const edit = this.state.edit;
@@ -39,7 +29,6 @@ export default class LogPage extends Component {
         <DetailPage
           initialData={this.state.initialData}
           handleEdit={this.handleEdit}
-          // edit={true}
         />
       );
     }
