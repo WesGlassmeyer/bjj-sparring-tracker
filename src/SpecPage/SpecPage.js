@@ -75,7 +75,13 @@ export default class SpecPage extends Component {
       chokes: {
         id: "chokes",
         label: "Select Submissions",
-        options: ["Rear Naked", "Triangle", "Head and Arm", "Collar Choke"],
+        options: [
+          "Rear Naked",
+          "Triangle",
+          "Head and Arm",
+          "Guillotine",
+          "Collar Choke",
+        ],
       },
       leg_attacks: {
         id: "leg attacks",
