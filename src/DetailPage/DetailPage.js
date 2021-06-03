@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SpecPage from "../SpecPage/SpecPage";
 import "./DetailPage.css";
+import config from "../config";
 
 export default class DetailPage extends Component {
   constructor(props) {
@@ -11,7 +12,6 @@ export default class DetailPage extends Component {
       this.state = { ...initialData, ...currentForm };
     } else {
       this.state = {
-        // edit: false, or use id from initial data to check whether to post or put
         currentForm: "main",
         date: "",
         rounds: "",
@@ -21,6 +21,11 @@ export default class DetailPage extends Component {
         sweeps: [],
         taps: [],
         notes: "",
+        dateError: "",
+        roundsError: "",
+        round_lengthError: "",
+        cardioError: "",
+        movesError: "",
       };
     }
   }
@@ -77,11 +82,82 @@ export default class DetailPage extends Component {
     }
   };
 
+  validate = () => {
+    let dateError = "";
+    let roundsError = "";
+    let round_lengthError = "";
+    let cardioError = "";
+    let movesError = "";
+
+    if (this.state.date === "") {
+      dateError = "Date field can't be empty";
+    }
+    if (this.state.rounds === "") {
+      roundsError = "Rounds field can't be empty";
+    }
+    if (this.state.round_length === "") {
+      round_lengthError = "Round Length field can't be empty";
+    }
+    if (this.state.cardio === "") {
+      cardioError = "Cardio field can't be empty";
+    }
+    if (
+      this.state.submissions.length === 0 &&
+      this.state.taps.length === 0 &&
+      this.state.sweeps.length === 0
+    ) {
+      movesError = "Must contain either submissions, taps or sweeps";
+    }
+    if (dateError || roundsError || round_lengthError || cardioError) {
+      this.setState({
+        dateError,
+        roundsError,
+        round_lengthError,
+        cardioError,
+        movesError,
+      });
+      return false;
+    }
+    return true;
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
-    alert("Your log entry will be added via a POST request");
-    this.props.handleEdit();
+    const isValid = this.validate();
+    if (isValid) {
+      fetch(
+        this.state.id
+          ? `${config.SERVER_endpoint}/` + this.state.id
+          : `${config.SERVER_endpoint}`,
+        {
+          method: this.state.id ? "PUT" : "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            date: this.state.date,
+            rounds: this.state.rounds,
+            round_length: this.state.round_length,
+            cardio: this.state.cardio,
+            notes: this.state.notes,
+            submissions: this.state.submissions,
+            sweeps: this.state.sweeps,
+            taps: this.state.taps,
+          }),
+        }
+      )
+        .then((response) => {
+          if (!response.ok)
+            return response.json().then((error) => Promise.reject(error));
+          return response.json();
+        })
+        .catch((error) => {
+          console.error({ error });
+        })
+        .then(() => {
+          this.props.handleEditState();
+        });
+    }
   };
 
   detailPageState = () => {
@@ -102,6 +178,7 @@ export default class DetailPage extends Component {
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
           detailPageState={this.detailPageState}
+          category={this.state.currentForm}
         />
       );
     } else if (this.state.currentForm === "taps") {
@@ -111,6 +188,7 @@ export default class DetailPage extends Component {
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
           detailPageState={this.detailPageState}
+          category={this.state.currentForm}
         />
       );
     } else if (this.state.currentForm === "sweeps") {
@@ -120,6 +198,7 @@ export default class DetailPage extends Component {
           setSpecPageState={this.setSpecPageState}
           changeForms={this.changeForms}
           detailPageState={this.detailPageState}
+          category={this.state.currentForm}
         />
       );
     }
@@ -127,7 +206,9 @@ export default class DetailPage extends Component {
       <div className="detail-page-container">
         <form>
           <h2 className="detail-page-title">Add Sparring Details</h2>
-          <button onClick={this.props.changeForms}>Back</button>
+          <button type="button" onClick={this.props.handleEditState}>
+            Back
+          </button>
           <br />
           <label htmlFor="date">Select date:</label>
           <input
@@ -137,6 +218,9 @@ export default class DetailPage extends Component {
             value={this.state.date}
             onChange={this.setDate}
           />
+          <div style={{ color: "red", fontSize: 12 }}>
+            {this.state.dateError}
+          </div>
           <br />
           <label htmlFor="rounds">Total Training Rounds:</label>
           <input
@@ -147,6 +231,9 @@ export default class DetailPage extends Component {
             step="1"
             onChange={this.setRounds}
           />
+          <div style={{ color: "red", fontSize: 12 }}>
+            {this.state.roundsError}
+          </div>
           <br />
           <label htmlFor="length">Round Length:</label>
           <input
@@ -157,6 +244,9 @@ export default class DetailPage extends Component {
             step="1"
             onChange={this.setLength}
           />
+          <div style={{ color: "red", fontSize: 12 }}>
+            {this.state.round_lengthError}
+          </div>
           <br />
           <label htmlFor="length">Rate Cardio:</label>
           <select
@@ -174,6 +264,9 @@ export default class DetailPage extends Component {
             <option value="4">4 - Good</option>
             <option value="5">5 - Excellent</option>
           </select>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {this.state.cardioError}
+          </div>
           <p>
             Submission
             <button
@@ -210,6 +303,9 @@ export default class DetailPage extends Component {
               Add Sweeps
             </button>
           </p>
+          <div style={{ color: "red", fontSize: 12 }}>
+            {this.state.movesError}
+          </div>
           <label htmlFor="notes">Notes:</label>
           <textarea
             value={this.state.notes}
