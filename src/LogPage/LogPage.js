@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import LogList from "../LogList/LogList";
 import "./LogPage.css";
 import DetailPage from "../DetailPage/DetailPage";
-import dummydata from "../dummydata";
+import config from "../config";
 
 export default class LogPage extends Component {
   state = {
@@ -10,16 +10,50 @@ export default class LogPage extends Component {
     initialData: null,
   };
 
+  handleEditState = () => {
+    this.setState({ edit: true });
+    if (this.state.edit === true) {
+      this.setState({ edit: false, initialData: null });
+    }
+  };
+
+  fetchData = () => {
+    fetch(config.SERVER_endpoint)
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then((error) => Promise.reject(error));
+        }
+        return res.json();
+      })
+      .then((res) => this.setEntries(res))
+      .catch((error) => {
+        console.error(error);
+        this.setState({ error });
+      });
+  };
+
   handleEdit = (id) => {
-    this.setState({
-      edit: true,
-      initialData: dummydata.entries.find((entry) => {
-        return id === entry.id;
-      }),
-    });
     if (this.state.edit === true) {
       this.setState({ edit: false });
     }
+    fetch(`${config.SERVER_endpoint}/` + id, {
+      method: "GET",
+      headers: { "content-type": "application/json" },
+    })
+      .then((response) => {
+        if (!response.ok)
+          return response.json().then((error) => Promise.reject(error));
+        return response.json();
+      })
+      .catch((error) => {
+        console.error({ error });
+      })
+      .then((res) => {
+        this.setState({
+          edit: true,
+          initialData: res,
+        });
+      });
   };
 
   render() {
@@ -28,7 +62,7 @@ export default class LogPage extends Component {
       return (
         <DetailPage
           initialData={this.state.initialData}
-          handleEdit={this.handleEdit}
+          handleEditState={this.handleEditState}
         />
       );
     }
@@ -41,7 +75,7 @@ export default class LogPage extends Component {
           <button
             type="button"
             className="add-log-btn"
-            onClick={this.handleEdit}
+            onClick={this.handleEditState}
           >
             Add
           </button>
