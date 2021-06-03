@@ -4,7 +4,8 @@ import "./SpecPage.css";
 
 export default class SpecPage extends Component {
   state = {
-    category: "",
+    group: "",
+    category: this.props.category,
     name: "",
     count: 1,
     addedNames: this.props.detailPageState(),
@@ -14,8 +15,8 @@ export default class SpecPage extends Component {
     this.setState({ name: event.target.value, count: 1 });
   };
 
-  setCategory = (event) => {
-    this.setState({ category: event.target.value, name: "", count: 1 });
+  setGroup = (event) => {
+    this.setState({ group: event.target.value, name: "", count: 1 });
   };
 
   incrementCount = () => {
@@ -41,7 +42,11 @@ export default class SpecPage extends Component {
       this.setState({
         addedNames: [
           ...this.state.addedNames,
-          { name: this.state.name, count: this.state.count },
+          {
+            name: this.state.name,
+            count: this.state.count,
+            category: this.state.category,
+          },
         ],
       });
     }
@@ -120,8 +125,8 @@ export default class SpecPage extends Component {
         id={dropdownValues.category.id}
         label={dropdownValues.category.label}
         options={dropdownValues.category.options}
-        value={this.state.category}
-        onChange={this.setCategory}
+        value={this.state.group}
+        onChange={this.setGroup}
       />
     );
     if (this.props.title === "Sweeps") {
@@ -130,8 +135,8 @@ export default class SpecPage extends Component {
           id={dropdownValues.sweep_category.id}
           label={dropdownValues.sweep_category.label}
           options={dropdownValues.sweep_category.options}
-          value={this.state.category}
-          onChange={this.setCategory}
+          value={this.state.group}
+          onChange={this.setGroup}
         />
       );
     }
@@ -146,7 +151,7 @@ export default class SpecPage extends Component {
         onChange={this.setName}
       />
     );
-    if (this.state.category === "Arm Attacks") {
+    if (this.state.group === "Arm Attacks") {
       nameDropdownFilter = (
         <DropdownFilter
           options={dropdownValues.arm_attacks.options}
@@ -156,7 +161,7 @@ export default class SpecPage extends Component {
           onChange={this.setName}
         />
       );
-    } else if (this.state.category === "Chokes") {
+    } else if (this.state.group === "Chokes") {
       nameDropdownFilter = (
         <DropdownFilter
           options={dropdownValues.chokes.options}
@@ -166,7 +171,7 @@ export default class SpecPage extends Component {
           onChange={this.setName}
         />
       );
-    } else if (this.state.category === "Leg Attacks") {
+    } else if (this.state.group === "Leg Attacks") {
       nameDropdownFilter = (
         <DropdownFilter
           options={dropdownValues.leg_attacks.options}
@@ -178,7 +183,7 @@ export default class SpecPage extends Component {
       );
     } else if (
       this.props.title === "Sweeps" &&
-      this.state.category === "Open Guard"
+      this.state.group === "Open Guard"
     ) {
       nameDropdownFilter = (
         <DropdownFilter
@@ -191,7 +196,7 @@ export default class SpecPage extends Component {
       );
     } else if (
       this.props.title === "Sweeps" &&
-      this.state.category === "Closed Guard"
+      this.state.group === "Closed Guard"
     ) {
       nameDropdownFilter = (
         <DropdownFilter
@@ -204,7 +209,7 @@ export default class SpecPage extends Component {
       );
     } else if (
       this.props.title === "Sweeps" &&
-      this.state.category === "Half Guard"
+      this.state.group === "Half Guard"
     ) {
       nameDropdownFilter = (
         <DropdownFilter
