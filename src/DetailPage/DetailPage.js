@@ -149,7 +149,6 @@ export default class DetailPage extends Component {
         .then((response) => {
           if (!response.ok)
             return response.json().then((error) => Promise.reject(error));
-          return response.json();
         })
         .catch((error) => {
           console.error({ error });
@@ -204,122 +203,139 @@ export default class DetailPage extends Component {
     }
     return (
       <div className="detail-page-container">
+        <h2 className="page-title">Add Sparring Details</h2>
         <form>
-          <h2 className="detail-page-title">Add Sparring Details</h2>
-          <button type="button" onClick={this.props.handleEditState}>
-            Back
-          </button>
-          <br />
-          <label htmlFor="date">Select date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={this.state.date}
-            onChange={this.setDate}
-          />
-          <div style={{ color: "red", fontSize: 12 }}>
-            {this.state.dateError}
-          </div>
-          <br />
-          <label htmlFor="rounds">Total Training Rounds:</label>
-          <input
-            value={this.state.rounds}
-            type="number"
-            min="1"
-            max="100"
-            step="1"
-            onChange={this.setRounds}
-          />
-          <div style={{ color: "red", fontSize: 12 }}>
-            {this.state.roundsError}
-          </div>
-          <br />
-          <label htmlFor="length">Round Length:</label>
-          <input
-            value={this.state.round_length}
-            type="number"
-            min="1"
-            max="60"
-            step="1"
-            onChange={this.setLength}
-          />
-          <div style={{ color: "red", fontSize: 12 }}>
-            {this.state.round_lengthError}
-          </div>
-          <br />
-          <label htmlFor="length">Rate Cardio:</label>
-          <select
-            name="length"
-            id="length"
-            onChange={this.setCardio}
-            value={this.state.cardio}
-          >
-            <option disabled value="">
-              -- Select --
-            </option>
-            <option value="1">1 - Poor</option>
-            <option value="2">2 - Fair</option>
-            <option value="3">3 - Average</option>
-            <option value="4">4 - Good</option>
-            <option value="5">5 - Excellent</option>
-          </select>
-          <div style={{ color: "red", fontSize: 12 }}>
-            {this.state.cardioError}
-          </div>
-          <p>
-            Submission
+          <div className="center-btn">
             <button
               type="button"
-              className="add-sub-btn"
+              className="button-format"
+              onClick={this.props.handleEditState}
+            >
+              Back
+            </button>
+          </div>
+          <div className="detail-input-container">
+            <div className="detail-input-format">
+              <label htmlFor="date">Select date: </label> <br></br>
+              <input
+                type="date"
+                id="date"
+                name="date"
+                className="detail-input date-input"
+                value={this.state.date}
+                onChange={this.setDate}
+              />
+              <div style={{ color: "red", fontSize: 12 }}>
+                {this.state.dateError}
+              </div>
+            </div>
+            <div className="detail-input-format">
+              <label htmlFor="rounds">Total Training Rounds: </label> <br></br>
+              <input
+                aria-label="total training rounds"
+                className="detail-input"
+                value={this.state.rounds}
+                type="number"
+                min="1"
+                max="100"
+                step="1"
+                onChange={this.setRounds}
+              />
+              <div style={{ color: "red", fontSize: 12 }}>
+                {this.state.roundsError}
+              </div>
+            </div>
+            <div className="detail-input-format">
+              <label htmlFor="length">Round Length: </label> <br></br>
+              <input
+                aria-label="round length"
+                className="detail-input"
+                value={this.state.round_length}
+                type="number"
+                min="1"
+                max="60"
+                step="1"
+                onChange={this.setLength}
+              />
+              <div style={{ color: "red", fontSize: 12 }}>
+                {this.state.round_lengthError}
+              </div>
+            </div>
+            <div className="detail-input-format">
+              <label htmlFor="cardio">Rate Cardio: </label> <br></br>
+              <select
+                className="detail-input cardio-input"
+                name="length"
+                id="length"
+                onChange={this.setCardio}
+                value={this.state.cardio}
+              >
+                <option disabled value="">
+                  -- Select --
+                </option>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Average</option>
+                <option value="4">4 - Good</option>
+                <option value="5">5 - Excellent</option>
+              </select>
+              <div style={{ color: "red", fontSize: 12 }}>
+                {this.state.cardioError}
+              </div>
+            </div>
+          </div>
+          <div className="add-moves-container">
+            <button
+              type="button"
+              className="add-sub-btn add-moves-btn"
               onClick={() => {
                 this.changeForms("subs");
               }}
             >
-              Add Subs
+              + <br></br> Subs
             </button>
-          </p>
-          <p>
-            Taps
+
             <button
               type="button"
-              className="add-tap-btn"
+              className="add-tap-btn add-moves-btn"
               onClick={() => {
                 this.changeForms("taps");
               }}
             >
-              Add Taps
+              + <br></br> Taps
             </button>
-          </p>
-          <p>
-            Sweeps
+
             <button
               type="button"
-              className="add-sweepbtn"
+              className="add-sweep-btn add-moves-btn"
               onClick={() => {
                 this.changeForms("sweeps");
               }}
             >
-              Add Sweeps
+              + <br></br> Sweeps
             </button>
-          </p>
-          <div style={{ color: "red", fontSize: 12 }}>
+          </div>
+
+          <div style={{ color: "red", fontSize: 12, textAlign: "center" }}>
             {this.state.movesError}
           </div>
-          <label htmlFor="notes">Notes:</label>
-          <textarea
-            value={this.state.notes}
-            id="notes"
-            name="notes"
-            rows="4"
-            cols="50"
-            placeholder="add notes"
-            onChange={this.setNotes}
-          ></textarea>
-          <div className="add-details">
+          <div className="notes-container">
+            <label htmlFor="notes">Notes:</label>
+            <br></br>
+            <textarea
+              value={this.state.notes}
+              id="notes"
+              className="notes"
+              rows="4"
+              cols="50"
+              placeholder="add notes"
+              onChange={this.setNotes}
+            ></textarea>
+          </div>
+          <div className="add-details center-btn">
             <button
               type="submit"
-              className="add-details-btn"
+              className="button-format"
               onClick={this.handleSubmit}
             >
               Save

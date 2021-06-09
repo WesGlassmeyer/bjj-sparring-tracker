@@ -122,11 +122,12 @@ export default class SpecPage extends Component {
 
     let categoryDropdownFilter = (
       <DropdownFilter
-        id={dropdownValues.category.id}
+        id={dropdownValues.category.options}
         label={dropdownValues.category.label}
         options={dropdownValues.category.options}
         value={this.state.group}
         onChange={this.setGroup}
+        aria="attacks"
       />
     );
     if (this.props.title === "Sweeps") {
@@ -137,6 +138,7 @@ export default class SpecPage extends Component {
           options={dropdownValues.sweep_category.options}
           value={this.state.group}
           onChange={this.setGroup}
+          aria="sweeps"
         />
       );
     }
@@ -159,6 +161,7 @@ export default class SpecPage extends Component {
           label={dropdownValues.arm_attacks.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="arm attacks"
         />
       );
     } else if (this.state.group === "Chokes") {
@@ -169,6 +172,7 @@ export default class SpecPage extends Component {
           label={dropdownValues.chokes.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="chokes"
         />
       );
     } else if (this.state.group === "Leg Attacks") {
@@ -179,6 +183,7 @@ export default class SpecPage extends Component {
           label={dropdownValues.leg_attacks.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="leg attacks"
         />
       );
     } else if (
@@ -192,6 +197,7 @@ export default class SpecPage extends Component {
           label={dropdownValues.open_guard.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="open guard sweeps"
         />
       );
     } else if (
@@ -205,6 +211,7 @@ export default class SpecPage extends Component {
           label={dropdownValues.closed_guard.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="closed guard sweeps"
         />
       );
     } else if (
@@ -218,64 +225,83 @@ export default class SpecPage extends Component {
           label={dropdownValues.half_guard.label}
           value={this.state.name}
           onChange={this.setName}
+          aria="half guard sweeps"
         />
       );
     }
 
     return (
-      <div className="spec-page-container">
-        <h2 className="detail-page-title">Add {this.props.title}</h2>
-        <button onClick={this.props.changeForms}>Back</button>
-        <label htmlFor="category">{this.props.title} Category:</label>
-        {categoryDropdownFilter}
+      <div className="center-spec">
+        <h2 className="page-title">Add {this.props.title}</h2>
+        <button
+          className="button-format center-btn"
+          onClick={this.props.changeForms}
+        >
+          Back
+        </button>
+        <div className="spec-input-format">
+          <label className="bold" htmlFor="category">
+            {this.props.title} Category:
+          </label>
+          {categoryDropdownFilter}
+        </div>
 
-        <br />
-        <label htmlFor="action_name">{this.props.title}:</label>
-        {nameDropdownFilter}
+        <div className="spec-input-format">
+          <label className="bold" htmlFor="action_name">
+            {this.props.title}:
+          </label>
+          {nameDropdownFilter}
+        </div>
         <br />
         <span className="counter-container">
-          {this.props.title} Counter : {this.state.count}
-          <button
-            type="button"
-            className="add-counter-btn"
-            onClick={this.incrementCount}
-          >
-            {" "}
-            +
-          </button>
-          <button
-            type="button"
-            className="minus-counter-btn"
-            onClick={this.decrementCount}
-          >
-            {" "}
-            -
-          </button>
+          <div className="bold">
+            <span> {this.props.title} Counter:</span>{" "}
+            <span className="counter-number"> {this.state.count}</span>
+          </div>
+          <div className="spec-counter-btns">
+            <button
+              type="button"
+              className="add-counter-btn bold"
+              onClick={this.incrementCount}
+            >
+              {" "}
+              +
+            </button>
+            <button
+              type="button"
+              className="minus-counter-btn bold"
+              onClick={this.decrementCount}
+            >
+              {" "}
+              -
+            </button>
+          </div>
         </span>
         <button
           type="button"
-          className="add-specs-list"
+          className="button-format center-btn"
           onClick={this.addSpecs}
         >
           {" "}
           Add {this.props.title}
         </button>
-        <table>
+        <table className="spec-table margin-top">
           <thead>
-            <tr>
-              <th>{this.props.title}</th>
-              <th>Count</th>
+            <tr className="title-row">
+              <th>Selected {this.props.title}</th>
+              <th className="center-number">Count</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {this.state.addedNames.map((names, index) => (
-              <tr key={index} id={index}>
+              <tr className="table-row bold" key={index} id={index}>
                 <td>{names.name}</td>
-                <td>{names.count}</td>
+                <td className="center-number">{names.count}</td>
                 <td>
                   <button
                     type="button"
-                    className="delete-table-row-btn"
+                    className="delete-button-format"
                     onClick={() => {
                       this.deleteTableRow(index);
                     }}
@@ -288,10 +314,10 @@ export default class SpecPage extends Component {
           </tbody>
         </table>
 
-        <div className="add-specs">
+        <div className="add-specs margin-top">
           <button
             type="submit"
-            className="save-list-btn"
+            className="button-format center-btn"
             onClick={() => {
               this.props.setSpecPageState(this.state.addedNames);
               this.props.changeForms();

@@ -68,18 +68,18 @@ export default class LogPage extends Component {
     }
     return (
       <div className="log-page">
-        <h2 className="log-page-title">Sparring Log</h2>
-
-        <LogList handleEdit={this.handleEdit} />
-        <div className="add-log">
+        <h2 className="page-title">Sparring Log</h2>
+        <div className="center-btn">
           <button
             type="button"
-            className="add-log-btn"
+            className="button-format"
             onClick={this.handleEditState}
           >
-            Add
+            Add Entry
           </button>
         </div>
+
+        <LogList handleEdit={this.handleEdit} />
       </div>
     );
   }

@@ -11,8 +11,14 @@ export default class StatsPage extends Component {
     isLoading: true,
   };
 
+  lineChartProps = {
+    margin: { top: 20, right: 30, bottom: 20, left: 35 },
+    animate: true,
+    enableSlices: "x",
+  };
+
   commonProperties = {
-    margin: { top: 20, right: 20, bottom: 60, left: 80 },
+    margin: { top: 20, right: 5, bottom: 20, left: 5 },
     animate: true,
     enableSlices: "x",
   };
@@ -95,42 +101,42 @@ export default class StatsPage extends Component {
     }
     return (
       <div>
-        <h2>Cardio Data</h2>
-        <div className="line-chart" style={{ height: "75vh", width: "75vw" }}>
+        <div className="btn-container">
+          <Link className="link-button" to="/sparring_log">
+            Back
+          </Link>
+        </div>
+        <h2 className="page-title">Cardio Data</h2>
+        <div className="line-chart" title="line chart">
           <ResponsiveLine
             data={this.lineChartData()}
-            {...this.commonProperties}
+            {...this.lineChartProps}
           />
         </div>
 
-        <h2>Submissons</h2>
-        <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
+        <h2 className="stat-title">Submissons</h2>
+        <div className="pie-chart">
           <ResponsivePie
             data={this.categoryData("submissions")}
             {...this.commonProperties}
             legends={[]}
           />
         </div>
-        <h2>Taps</h2>
-        <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
+        <h2 className="stat-title">Taps</h2>
+        <div className="pie-chart">
           <ResponsivePie
             data={this.categoryData("taps")}
             {...this.commonProperties}
             legends={[]}
           />
         </div>
-        <h2>Sweeps</h2>
-        <div className="pie-chart" style={{ height: "75vh", width: "75vw" }}>
+        <h2 className="stat-title">Sweeps</h2>
+        <div className="pie-chart">
           <ResponsivePie
             data={this.categoryData("sweeps")}
             {...this.commonProperties}
             legends={[]}
           />
-        </div>
-        <div className="back-btn">
-          <button type="button" className="back-btn">
-            <Link to="/sparring_log">Back</Link>
-          </button>
         </div>
       </div>
     );

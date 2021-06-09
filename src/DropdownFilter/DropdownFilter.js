@@ -1,5 +1,4 @@
 import React from "react";
-// import "./DropdownFilter.css";
 
 export default function DropdownFilter(props) {
   const options = props.options;
@@ -13,8 +12,8 @@ export default function DropdownFilter(props) {
     <div className="custom-select">
       <select
         disabled={props.disabled}
-        aria-label={props.id}
-        className="dropdown"
+        aria-label={props.aria}
+        className="spec-input"
         id={props.id}
         onChange={props.onChange}
         value={props.value}
