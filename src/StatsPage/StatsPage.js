@@ -93,10 +93,31 @@ export default class StatsPage extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <section className="StatsPageLoad">Loading...</section>;
+      return (
+        <div>
+          <section className="StatsPageLoad">Loading...</section>
+          <div className="btn-container">
+            <Link className="link-button" to="/sparring_log">
+              Back
+            </Link>
+          </div>
+          ;
+        </div>
+      );
     }
-    if (this.state.entries.length === 0) {
-      return <section>Not enough data to show statistics</section>;
+    if (!this.state.entries) {
+      return (
+        <div>
+          <section className="StatsPageLoad">
+            Not enough data to show statistics
+          </section>
+          <div className="btn-container">
+            <Link className="link-button" to="/sparring_log">
+              Back
+            </Link>
+          </div>
+        </div>
+      );
     }
     return (
       <div>

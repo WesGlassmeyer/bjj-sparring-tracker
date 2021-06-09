@@ -26,6 +26,11 @@ rect {
   text-align: center;
 }
 
+.StatsPageLoad {
+  margin-top: 30px;
+  text-align: center;
+}
+
 @media screen and (min-width: 600px) {
   .pie-chart {
     height: 300px;
