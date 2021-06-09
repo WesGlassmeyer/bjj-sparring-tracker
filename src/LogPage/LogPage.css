@@ -1,6 +1,5 @@
-.log-page {
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
+.page-title {
+  color: #000000;
+  margin: 4% 0 0 0;
+  text-align: center;
 }

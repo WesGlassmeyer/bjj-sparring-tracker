@@ -1,20 +1,19 @@
 .NavbarItems {
-  background-color: rgb(0, 153, 255);
+  background-color: #2d8a78;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
-  margin-top: 1%;
+  font-weight: 600;
 }
 
 .navbar-logo {
-  color: #fff;
+  color: #000000;
   justify-self: start;
-  margin-left: 20px;
+  margin-left: 15px;
   cursor: pointer;
+  text-shadow: 1px 1px 1px #ffb700;
 }
 
 .nav-menu {
@@ -30,18 +29,19 @@
 }
 
 .nav-links {
-  color: white;
+  color: #000000;
   text-decoration: none;
   padding: 0.5rem 1rem;
+  font-weight: 900;
 }
 
 .nav-links:hover {
-  color: black;
+  text-shadow: 1px 1px 1px #ffb700;
   transition: all 0.2s ease-out;
 }
 
 .fa-bars {
-  color: #fff;
+  color: #000000;
 }
 
 .menu-icon {
@@ -59,15 +59,14 @@
     width: 100%;
     height: 190px;
     position: absolute;
-    top: 42px;
+    top: 40px;
     left: -100%;
     opacity: 1;
     transition: all 0.5s ease;
-    /* margin: 8%; */
   }
 
   .nav-menu.active {
-    background: rgb(0, 153, 255);
+    background: #2d8a78;
     left: 0;
     opacity: 1;
     transition: all 0.5s ease;
@@ -80,7 +79,8 @@
     width: 75%;
     display: table;
     background-color: transparent;
-    border-bottom: 2px solid white;
+    border-bottom: 2px solid #ffb700;
+    text-shadow: none;
   }
 
   .navbar-logo {
@@ -99,7 +99,7 @@
   }
 
   .fa-times {
-    color: #fff;
+    color: #000000;
     font-size: 2rem;
   }
 

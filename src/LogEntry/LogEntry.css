@@ -1,10 +1,73 @@
 .log-entry {
-  background-color: rgb(218, 218, 218);
+  background-color: #f0fffc;
   list-style-type: none;
-  width: 300px;
-  margin: 5% 0% 5% 0%;
+  width: 90vw;
+  height: 25vh;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px #ffb700;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.entry-span {
-  margin-left: 5%;
+.entry-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.date-edit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.edit-btn {
+  font-size: 20px;
+  border: none;
+  background-color: #f0fffc;
+  font-weight: 900;
+  padding: 0;
+  text-align: center;
+  color: #323232;
+}
+
+.entry-text {
+  margin: 5% 5%;
+  color: #323232;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 30vh;
+}
+
+.entry-specs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.date {
+  color: #323232;
+  font-size: 20px;
+}
+
+@media screen and (min-width: 650px) {
+  .log-list__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .log-entry {
+    width: 300px;
+    height: 25vh;
+  }
 }

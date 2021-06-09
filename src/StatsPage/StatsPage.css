@@ -1,7 +1,41 @@
 .line-chart {
-  margin: 10%, 10%;
+  margin: 15px auto;
+  height: 60vh;
+  width: 95vw;
 }
 
 .data-btn {
   margin-left: 50%;
+}
+
+.pie-chart {
+  margin: 15px auto;
+  height: 200px;
+  width: 100vw;
+}
+
+rect {
+  width: 687px;
+  height: 500.453px;
+  fill: transparent;
+}
+
+.stat-title {
+  color: #323232;
+  margin: 35px 0 20px 0;
+  text-align: center;
+}
+
+@media screen and (min-width: 600px) {
+  .pie-chart {
+    height: 300px;
+    width: 75vw;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .pie-chart {
+    height: 75vh;
+    width: 75vw;
+  }
 }
