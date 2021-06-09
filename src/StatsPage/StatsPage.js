@@ -88,7 +88,6 @@ export default class StatsPage extends Component {
       });
     });
     data.push(rounds, roundLength, cardio);
-    console.log(data);
     return data;
   };
 
