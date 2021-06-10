@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# BJJ Sparring Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In Brazilian Jiu Jitsu we do a lot of sparring.
+You can use our app to track your sparring sessions and use the
+statistics to help guide your training.
 
-## Available Scripts
+This repo is the front-end client, built in React. You can see the app live at
 
-In the project directory, you can run:
+https://bjj-sparring-tracker.vercel.app/
 
-### `npm start`
+## Quick App Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![](gif/demo.gif)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Technology
 
-### `npm test`
+#### Front End
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+  - Create React App
+  - React Router
+- HTML5
+- CSS3 (scratch - no frameworks)
 
-### `npm run build`
+#### Testing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Jest
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Production
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Deployed via Vercel
 
-### `npm run eject`
+## Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Run `npm install` to load dependencies
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Run `npm test` to ensure a stable build
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+This is only the front end client, so to develop locally you'll need the backend server as well.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+To get the backend up and running see https://github.com/WesGlassmeyer/bjj-sparring-tracker-api
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deployments are handled through Vercel and can be run via `npm run deploy`
