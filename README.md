@@ -10,7 +10,7 @@ https://bjj-sparring-tracker.vercel.app/
 
 ## Quick App Demo
 
-![](gif/demo.gif.mp4)
+![](gif/demo.mp4)
 
 ## Technology
 
