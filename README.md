@@ -1,3 +1,5 @@
+
+
 # BJJ Sparring Tracker
 
 In Brazilian Jiu Jitsu we do a lot of sparring.
@@ -10,7 +12,7 @@ https://bjj-sparring-tracker.vercel.app/
 
 ## Quick App Demo
 
-![](gif/demo.mp4)
+https://user-images.githubusercontent.com/71471439/121461529-48cd5800-c96c-11eb-9029-0c170e5254a8.mp4
 
 ## Technology
 
