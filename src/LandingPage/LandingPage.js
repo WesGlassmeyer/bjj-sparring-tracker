@@ -15,7 +15,8 @@ export default class LandingPage extends Component {
               statistics to help guide your training.
             </p>
             <p>
-              Click below to go to the sparring log and create your first entry.
+              Click below to go to the sparring log and click Add Entry to start
+              creating your first entry.
             </p>
           </div>
         </div>
